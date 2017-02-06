@@ -17,21 +17,25 @@
         android:text="Hello World!" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/radio1"
             android:checked="true"
             android:text="radion1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <RadioButton
-            android:text="radion2"
+            android:id="@+id/radio2"
+            android:text="radion21"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <RadioButton
+            android:id="@+id/radio3"
             android:text="radion3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
