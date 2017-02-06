@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_centerInParent="true"
+        android:id="@+id/myID"
+        android:text="ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:background="#b16565"
+        android:hint="enterid"
+        android:layout_alignBottom="@id/myID"
+        android:layout_toRightOf="@id/myID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@id/myID"
+        android:layout_alignLeft="@id/myID"
+        android:id="@+id/myPWD"
+        android:text="PWD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:background="#c6bd5b"
+        android:hint="enter pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/myPWD"
+        android:layout_alignBottom="@id/myPWD"
+        android:id="@+id/editText" />
+
+    <Button
+        android:layout_alignLeft="@id/myPWD"
+        android:layout_below="@id/myPWD"
+        android:text="myButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+</RelativeLayout>
