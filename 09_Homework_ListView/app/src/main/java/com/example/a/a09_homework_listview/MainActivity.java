@@ -10,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +25,55 @@ public class MainActivity extends AppCompatActivity {
 
     }
     ArrayList<WeatherData> weatherDataArrayList = new ArrayList<>();
+
+    class WeatherAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return weatherDataArrayList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return weatherDataArrayList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null){
+                convertView = getLayoutInflater().inflate(R.layout.list_item2,null);
+            }
+
+            TextView wetherInfo1 = (TextView) convertView.findViewById(R.id.weatherInfo1);
+            TextView wetherInfo2 = (TextView) convertView.findViewById(R.id.weatherInfo2);
+
+            WeatherData data = weatherDataArrayList.get(position);
+
+            String info1 = "날씨: " + data.weather + " 온도: " + data.temperature;
+
+            Date date = new Date();
+            date.setDate(data.hour);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일 HH시");
+            String info2 = sdf.format(date);
+
+            //String info2 = "day " + data.day + " hour: " + data.hour;
+
+            wetherInfo1.setText(info1);
+            wetherInfo2.setText(info2);
+
+            return convertView;
+        }
+    }
+
+
+
 
     class MyData {
         String weather;
@@ -105,6 +156,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        ListView listView = (ListView) findViewById(R.id.myListView);
+        MyAdapter myAdapter = new MyAdapter();
+        listView.setAdapter(myAdapter);
+
+
         //기초 data만들기2
         for(int i=0; i < 20; i++) {
             WeatherData weatherData = new WeatherData();
@@ -135,9 +191,9 @@ public class MainActivity extends AppCompatActivity {
             weatherDataArrayList.add(weatherData);
          }
 
-        ListView listView = (ListView) findViewById(R.id.myListView);
-        MyAdapter myAdapter = new MyAdapter();
-        listView.setAdapter(myAdapter);
+        ListView listView2 = (ListView) findViewById(R.id.myListView2);
+        WeatherAdapter weatherAdapter = new WeatherAdapter();
+        listView2.setAdapter(weatherAdapter);
 
     }
 }
