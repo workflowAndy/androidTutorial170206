@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         float temperature;
         int day;
         int hour;
+        int Image;
 
     }
     ArrayList<WeatherData> weatherDataArrayList = new ArrayList<>();
@@ -107,7 +108,26 @@ public class MainActivity extends AppCompatActivity {
         //기초 data만들기2
         for(int i=0; i < 20; i++) {
             WeatherData weatherData = new WeatherData();
-            weatherData.weather = "흐림";
+
+            switch (i%4){
+                case 0:
+                    weatherData.weather = "맑음";
+                    weatherData.Image = R.drawable.clean;
+                    break;
+                case 1:
+                    weatherData.weather = "흐림";
+                    weatherData.Image = R.drawable.cloudy;
+                    break;
+                case 2:
+                    weatherData.weather = "비";
+                    weatherData.Image = R.drawable.rainy;
+                    break;
+                case 3:
+                    weatherData.weather = "눈";
+                    weatherData.Image = R.drawable.snow;
+                    break;
+            }
+
             weatherData.temperature = 10.0f;
             weatherData.day = (i*3)/24;
             weatherData.hour = (i*3)%24;

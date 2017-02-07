@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/clean"
+        android:id="@+id/weatherIcon"
+        android:layout_margin="12dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <TextView
+            android:id="@+id/weatherInfo1"
+            android:textSize="24dp"
+            android:text="날씨: 맑음, 온도:7도"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+
+        <TextView
+            android:id="@+id/weatherInfo2"
+            android:textSize="16dp"
+            android:text="2017년2월10일 18시"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+
+
+
+    </LinearLayout>
+</LinearLayout>
