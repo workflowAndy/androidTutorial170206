@@ -11,7 +11,9 @@
     tools:context="com.example.a.a04_menu.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/myTextView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="#ffc800"
         android:text="Hello World!" />
 </RelativeLayout>
