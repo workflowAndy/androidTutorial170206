@@ -21,7 +21,40 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            return null;
+            String res = "";
+
+            try {
+                XmlPullParser xpp = XmlPullParserFactory.newInstance().newPullParser();
+                URL url = new URL(params[0]);
+                xpp.setInput(url.openStream(),"utf-8");
+                int eventType = xpp.getEventType();
+
+                boolean bRead = false;
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    switch (eventType){
+                        case XmlPullParser.START_TAG:
+                            xpp.getName(); // tag명을 알수 있음
+                            if(xpp.getName().equals("wfKor")){
+                                bRead = true;
+                            }
+                            break;
+                        case XmlPullParser.TEXT:
+                            if (bRead) {
+                                xpp.getText(); // 텍스트를 알수 있음.
+                                res = "날씨 : " + xpp.getText();
+                                bRead = false;
+                            }
+                            break;
+                        case XmlPullParser.END_TAG:
+                            break;
+                    }
+                    eventType = xpp.next();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return res;
         }
 
         @Override
