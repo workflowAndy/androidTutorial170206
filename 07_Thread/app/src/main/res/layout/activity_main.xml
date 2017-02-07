@@ -22,4 +22,12 @@
         android:text="Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <ProgressBar
+        android:progress="30"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/myProcessBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

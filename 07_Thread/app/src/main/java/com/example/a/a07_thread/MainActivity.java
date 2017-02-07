@@ -6,11 +6,13 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     static final int MY_THREAD_TEST = 100;
     TextView myTextView;
+    ProgressBar myProgressBar;
 
     class MyThread extends Thread{
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
           //      myTextView.setText("count"+i);
 
                 Message msg = new Message();
+
                 msg.what = MY_THREAD_TEST;
                 msg.arg1 = i;
                 handler.sendMessage(msg);
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             if (msg.what == MY_THREAD_TEST){
                 myTextView.setText("count:" + msg.arg1);
+                myProgressBar.setProgress(msg.arg1+1);
             }
             //super.handleMessage(msg);
         }
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myTextView = (TextView) findViewById(R.id.myTextView);
+        myProgressBar = (ProgressBar) findViewById(R.id.myProcessBar);
     }
 
 
