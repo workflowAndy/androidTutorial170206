@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         myProgressBar = (ProgressBar) findViewById(R.id.myProcessBar);
     }
 
-
     public void onBtnClick(View view){
         MyThread myThread = new MyThread();
         myThread.start();
