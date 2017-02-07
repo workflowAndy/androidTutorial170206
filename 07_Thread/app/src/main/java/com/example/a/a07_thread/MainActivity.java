@@ -1,11 +1,16 @@
 package com.example.a.a07_thread;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    static final int MY_THREAD_TEST = 100;
+    TextView myTextView;
 
     class MyThread extends Thread{
 
@@ -13,6 +18,13 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             for(int i=0 ; i<20; i++){
                 Log.d("Tread Test","count" +i);
+          //      myTextView.setText("count"+i);
+
+                Message msg = new Message();
+                msg.what = MY_THREAD_TEST;
+                msg.arg1 = i;
+                handler.sendMessage(msg);
+
                 try {
                     sleep(100);
                 } catch (InterruptedException e) {
@@ -23,10 +35,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == MY_THREAD_TEST){
+                myTextView.setText("count:" + msg.arg1);
+            }
+            //super.handleMessage(msg);
+        }
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        myTextView = (TextView) findViewById(R.id.myTextView);
     }
 
 
