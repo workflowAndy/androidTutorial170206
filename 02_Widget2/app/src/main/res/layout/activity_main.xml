@@ -57,4 +57,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:inputType="number"
+        android:hint="enter data"
+        android:id="@+id/myEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ToggleButton
+        android:text="toggole"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
