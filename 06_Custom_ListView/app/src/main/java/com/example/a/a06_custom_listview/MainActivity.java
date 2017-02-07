@@ -72,7 +72,12 @@ public class MainActivity extends AppCompatActivity {
             MyData data = new MyData();
             data.title = "My Title" + i;
             data.desc = "My Desc" + i;
-            data.imgIcon = R.mipmap.ic_launcher;
+
+            if (i%2 ==0) {
+                data.imgIcon = R.mipmap.ic_launcher;
+            }else{
+                data.imgIcon = R.drawable.ic_accessibility_black_24dp;
+            }
             list.add(data);
         }
 
