@@ -77,13 +77,32 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     while (mp != null) {
+
+                        //현재 음원의 위치를 밀리 세컨드 단위로 return
+                        //start 상태일때만 mp.getCurrentPosition() 를 가져올수 있다.
+                        seekBar.setProgress(mp.getCurrentPosition());
+
                         try {
                             Thread.sleep(100); //0.1 초마다 아래것을 수행
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        //현재 음원의 위치를 밀리 세컨드 단위로 return
-                        seekBar.setProgress(mp.getCurrentPosition());
+
+                        /* 강사는 아래와 같이 처리함. = 퉁 쳐서 처리
+                           원래는 mediaplay의 상태값을 고려해서 coding이 되어야함
+                           하기 참조 필요
+                           https://developer.android.com/reference/android/media/MediaPlayer.html
+                        try {
+                            //현재 음원의 위치를 밀리 세컨드 단위로 return
+                            seekBar.setProgress(mp.getCurrentPosition());
+
+                            Thread.sleep(100); //0.1 초마다 아래것을 수행
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        */
+
+
                     }
                 }
             }).start();
