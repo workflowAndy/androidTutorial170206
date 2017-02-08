@@ -13,6 +13,7 @@ public class TestSQLiteHandler {
     TestSQLiteOpenHelper openHelper;
 
     public TestSQLiteHandler(Context context){
+        //db를 얻어온다.
         openHelper = new TestSQLiteOpenHelper(context,"dbname",null,1);
     }
 
@@ -46,6 +47,7 @@ public class TestSQLiteHandler {
         SQLiteDatabase db = openHelper.getReadableDatabase();
         String res = "";
 
+        //Cursor c2 = db.rawQuery("select * from student",null);
         Cursor c = db.query("student",null,null,null,null,null,null);
 
         while (c.moveToNext()){
