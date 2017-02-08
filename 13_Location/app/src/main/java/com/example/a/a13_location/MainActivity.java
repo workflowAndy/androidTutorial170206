@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView myTextView;
     Geocoder geocoder;
+    LocationManager manager;
+    LocationListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         myTextView = (TextView) findViewById(R.id.myTextView);
         String str = "";
 
-        LocationManager manager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        manager = (LocationManager) getSystemService(LOCATION_SERVICE);
         List<String> providers = manager.getAllProviders();
 
         //위치정보를 제공해주는 3가지 정도의 프로바이더가 나온다
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         //google에서  "google play location api" 로 검색한다.
 
         //로케이션 리스너를 만들어서 callback 받게 하다.
-        LocationListener listener = new LocationListener() {
+        listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
 
@@ -90,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
         //또는 category를 이용하여, 목적에 맞게 선택할수도 있다. googling 해봐라
         //실제 device에서는 network_provider에서만 정보를 받아온다고 함- 강사
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        manager.removeUpdates(listener);
     }
 
     public void onBtnClick(View v){
