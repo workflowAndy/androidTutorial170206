@@ -2,15 +2,12 @@ package com.example.a.a09_pullparser;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.view.AsyncLayoutInflater;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         case XmlPullParser.TEXT:
                             if (bRead) {
                                 xpp.getText(); // 텍스트를 알수 있음.
-                                res = "날씨 : " + xpp.getText();
+                                res += "날씨 : " + xpp.getText() + "\n";
                                 bRead = false;
                             }
                             break;
@@ -86,18 +83,17 @@ public class MainActivity extends AppCompatActivity {
         //http://www.kma.go.kr/weather/lifenindustry/sevice_rss.jsp?sido=4100000000&gugun=4146300000&dong=4146351000&x=24&y=10
         //http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4146351000
 
-        try {
-            URL url = new URL("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4146351000");
-            XmlPullParserFactory factory =  XmlPullParserFactory.newInstance();
-            XmlPullParser xpp = factory.newPullParser();
-            xpp.setInput(url.openStream(),"UTF-8");
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
+//        try {
+//            URL url = new URL("http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4146351000");
+//            XmlPullParserFactory factory =  XmlPullParserFactory.newInstance();
+//            XmlPullParser xpp = factory.newPullParser();
+//            xpp.setInput(url.openStream(),"UTF-8");
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (XmlPullParserException e) {
+//            e.printStackTrace();
         }
 
 
     }
-}
