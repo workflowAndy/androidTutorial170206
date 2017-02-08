@@ -9,12 +9,43 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
+
+import static com.example.a.a09_pullparser.R.id.weatherTextView;
 
 public class MainActivity extends AppCompatActivity {
+    class WeatherData{
+        int day;
+        int hour;
+        float temp;
+        String wfKor;
+
+        @Override
+        public String toString() {
+            String res = "day:" +day + " hour:" + hour + " temp:" + temp + " wfkor" +wfKor;
+            return res;
+        }
+    }
+
+    ArrayList<WeatherData> list = new ArrayList<>();
+
+    enum DataType {none, hourType, dayType, tempType, wfKorType}
+    DataType type =  DataType.none;
 
     TextView weatherTextView;
 
     class MyPullParserTask extends AsyncTask<String,Void,String>{
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            String res = "";
+            for(WeatherData data:list){
+                res += data.toString() +"\n";
+            }
+
+            weatherTextView.setText(res);
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -28,20 +59,46 @@ public class MainActivity extends AppCompatActivity {
 
                 boolean bRead = false;
 
+                WeatherData data = null;
+
                 while (eventType != XmlPullParser.END_DOCUMENT){
                     switch (eventType){
                         case XmlPullParser.START_TAG:
                             xpp.getName(); // tag명을 알수 있음
-                            if(xpp.getName().equals("wfKor")){
-                                bRead = true;
+                            if(xpp.getName().equals("hour")){
+                                type = DataType.hourType;
+                                data = new WeatherData();
+                                list.add(data); // data생성
+                            }else if(xpp.getName().equals("wfKor")){
+                                type = DataType.wfKorType;
+                            }else if(xpp.getName().equals("day")) {
+                                type = DataType.dayType;
+                            }else if(xpp.getName().equals("temp")) {
+                                type = DataType.tempType;
                             }
+
                             break;
                         case XmlPullParser.TEXT:
-                            if (bRead) {
-                                xpp.getText(); // 텍스트를 알수 있음.
-                                res += "날씨 : " + xpp.getText() + "\n";
-                                bRead = false;
+                            switch (type){
+                                case hourType:
+                                    data.hour = Integer.parseInt(xpp.getText());
+                                    break;
+                                case dayType:
+                                    data.day = Integer.parseInt(xpp.getText());
+                                    break;
+                                case tempType:
+                                    data.temp = Float.parseFloat(xpp.getText());
+                                    break;
+                                case wfKorType:
+                                    data.wfKor = xpp.getText();
+                                    break;
                             }
+                            type = DataType.none;
+//                            if (bRead) {
+//                                xpp.getText(); // 텍스트를 알수 있음.
+//                                res += "날씨 : " + xpp.getText() + "\n";
+//                                bRead = false;
+//                            }
                             break;
                         case XmlPullParser.END_TAG:
                             break;
@@ -54,11 +111,7 @@ public class MainActivity extends AppCompatActivity {
             return res;
         }
 
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            weatherTextView.setText(s);
-        }
+
     }
 
 
@@ -69,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        weatherTextView = (TextView) findViewById(R.id.weatherTextView);
+        weatherTextView = (TextView) findViewById(weatherTextView);
 
         //개발방향
         MyPullParserTask myPullParserTask = new MyPullParserTask();
