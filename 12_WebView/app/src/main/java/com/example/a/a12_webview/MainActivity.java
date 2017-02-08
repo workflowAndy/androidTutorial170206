@@ -46,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient()); //추가적인 내용을 사용할때 추가해서 쓴다
 
         webView.loadUrl("http://www.daum.net");
+
+        /*
+         참고 : setjavascriptcanopenwindowsautomatically 로 찾아서 아래것을 참조해 봐라
+         참고 : http://ymson.tistory.com/entry/WebView-windowopen-%EC%B2%98%EB%A6%AC
+
+         */
     }
 
     //backkey를 눌렀을때
