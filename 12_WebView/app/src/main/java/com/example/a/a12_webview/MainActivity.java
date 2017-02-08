@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog dialog;
     WebView webView;
 
+    //webviewclient를 상속받아서, 내가 필요한것을 재정의 한다.
     class MyWebViewClient extends WebViewClient{
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -40,8 +42,21 @@ public class MainActivity extends AppCompatActivity {
 
         webView.getSettings().setJavaScriptEnabled(true); //javascript활성화
 
-        webView.setWebViewClient(new MyWebViewClient());
+        webView.setWebViewClient(new MyWebViewClient()); // 필수 적으로 사용한다.
+        webView.setWebChromeClient(new WebChromeClient()); //추가적인 내용을 사용할때 추가해서 쓴다
+
         webView.loadUrl("http://www.daum.net");
+    }
+
+    //backkey를 눌렀을때
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();  back key 수행을 막기위해서 막아야 함.
+        if(webView.canGoBack()){
+            webView.goBack();
+        }else{
+            finish(); // 더이상 돌아갈 페이지가 없으면 activity를 종료한다.
+        }
     }
 
     public void onBtnClick(View v){
