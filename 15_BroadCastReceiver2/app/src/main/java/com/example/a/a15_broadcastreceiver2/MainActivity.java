@@ -4,8 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
             }else if (action.equals(Intent.ACTION_BATTERY_LOW)){
                 int val = intent.getIntExtra("level", 0);  //베터리 정보가 넘어옴
                 Toast.makeText(context, "battery Low : " + val, Toast.LENGTH_SHORT).show();
+            }else if (action.equals("packagename.ABC")){ //custome action에 대한 처리를 한다.
+                Toast.makeText(context, "My Broadcast", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         filter.addAction(Intent.ACTION_BATTERY_LOW);  //low일때 발생 (15% 이하)
 
+        filter.addAction("packagename.ABC"); //custome action 추가
+
         registerReceiver(receiver,filter);
 
     }
@@ -50,5 +55,11 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         //화면에 안보이면, 해제한다.
         unregisterReceiver(receiver);
+    }
+
+    public void onBtnClick(View v){
+        Intent intent = new Intent("packagename.ABC");
+        sendBroadcast(intent);
+
     }
 }
