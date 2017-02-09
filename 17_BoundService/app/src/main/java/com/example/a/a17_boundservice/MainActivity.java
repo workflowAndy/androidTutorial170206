@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     //http://rdcworld-android.blogspot.kr/2011/07/service-lifecycle.html
+    //MainActivity에서 Service의 Public Method를 호출 할수 있다.
 
     MyService myService;
     ServiceConnection conn = new ServiceConnection() {
