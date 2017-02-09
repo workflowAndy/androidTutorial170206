@@ -13,8 +13,15 @@ public class MainActivity extends AppCompatActivity {
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int val = intent.getIntExtra("level",0);  //베터리 정보가 넘어옴
-            Toast.makeText(context, "battery : " + val, Toast.LENGTH_SHORT).show();
+
+            String action  = intent.getAction();
+            if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+                int val = intent.getIntExtra("level", 0);  //베터리 정보가 넘어옴
+                Toast.makeText(context, "battery : " + val, Toast.LENGTH_SHORT).show();
+            }else if (action.equals(Intent.ACTION_BATTERY_LOW)){
+                int val = intent.getIntExtra("level", 0);  //베터리 정보가 넘어옴
+                Toast.makeText(context, "battery Low : " + val, Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
@@ -32,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter();
         //filter.addAction("android.intent.action.BATTERY_CHANGED");  아래와 같이 쓴다
         filter.addAction(Intent.ACTION_BATTERY_CHANGED);
+        filter.addAction(Intent.ACTION_BATTERY_LOW);  //low일때 발생 (15% 이하)
 
         registerReceiver(receiver,filter);
 
