@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnClick(View v){
 
+        //암시적 intent 사용 예제
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent,100);
         
