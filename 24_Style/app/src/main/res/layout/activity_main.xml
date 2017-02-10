@@ -35,7 +35,7 @@
         <Button
             android:id="@+id/zeroButton"
             android:text="0"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"/>
@@ -43,7 +43,7 @@
         <Button
             android:id="@+id/oneButton"
             android:text="1"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"/>
@@ -51,7 +51,7 @@
         <Button
             android:id="@+id/enterButton"
             android:text="Enter"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"/>
