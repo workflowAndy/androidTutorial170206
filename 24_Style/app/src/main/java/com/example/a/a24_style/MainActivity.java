@@ -20,9 +20,6 @@ public class MainActivity extends AppCompatActivity {
         selectedTextView = (TextView) findViewById(R.id.selectedTextView);
         workingTextView = (TextView) findViewById(R.id.workingTextView);
 
-
-//        Button enterButton = (Button) findViewById(R.id.enterButton);
-
         View.OnClickListener numberListner = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
