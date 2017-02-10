@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         tr.hide(fragment);
                     }
-                    tr.addToBackStack(null);  //backstack를 추가한다.
+                    tr.addToBackStack(null);  //backstack를 추가한다. //해야 할지, 안해야 할지는 고민해야함
+                                                //back키에 대한 고민은 해야 함.
 
                     tr.commit();
                 }
