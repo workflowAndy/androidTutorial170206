@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 boolean bRead = false;
                 boolean bRead2 = false;
                 boolean bRead3 = false;
+
+                int j = 0;
+
                 WeatherData weatherData = null;
 
                 while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -115,22 +118,25 @@ public class MainActivity extends AppCompatActivity {
 
                             if ("hour".equals(xpp.getName())) {
                                 weatherData = new WeatherData();
-                                bRead = true;
+                                j=1;
+                            }else if ("temp".equals(xpp.getName())) {
+                                j=2;
+                            }else if ("wfKor".equals(xpp.getName())) {
+                                j=3;
                             }
                             break;
                         case XmlPullParser.TEXT:
-                            if (bRead) {
 
-                                if ("hour".equals(xpp.getName())) {
-                                    weatherData.info1 = "시간 : " + xpp.getText();
-                                } else if ("temp".equals(xpp.getName())) {
-                                    weatherData.info2 = "온도 : " + xpp.getText();
-                                } else if ("wfKor".equals(xpp.getName())) {
-                                    weatherData.info3 = "날씨 : " + xpp.getText();
-                                }
+                            if (j==1) {
+                                weatherData.info1 = "시간 : " + xpp.getText();
+                            } else if (j==2) {
+                                weatherData.info2 = "온도 : " + xpp.getText();
+                            } else if (j==3) {
+                                weatherData.info3 = "날씨 : " + xpp.getText();
                                 wArrayList.add(weatherData);
-                                bRead = false;
+                                j = 0;
                             }
+
 
                             if (bRead2) {
                                 title = xpp.getText();
@@ -144,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
                             break;
                         case XmlPullParser.END_TAG:
-
                             break;
                     }
 
