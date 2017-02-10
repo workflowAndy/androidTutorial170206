@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         intData();
     }
 
-
     private void intData(){
         weatherDataArrayList.clear();
 
